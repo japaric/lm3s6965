@@ -1,0 +1,12 @@
+[package]
+authors = ["Jorge Aparicio <jorge@japaric.io>"]
+edition = "2018"
+name = "lm3s6965"
+version = "0.1.0"
+
+[dependencies]
+bare-metal = "0.2.3"
+
+[dependencies.cortex-m-rt]
+features = ["device"]
+version = "0.6.5"
