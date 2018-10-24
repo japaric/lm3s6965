@@ -6,7 +6,12 @@ fn main() {
         .unwrap()
         .write_all(include_bytes!("device.x"))
         .unwrap();
+    File::create(out.join("memory.x"))
+        .unwrap()
+        .write_all(include_bytes!("memory.x"))
+        .unwrap();
     println!("cargo:rustc-link-search={}", out.display());
     println!("cargo:rerun-if-changed=device.x");
+    println!("cargo:rerun-if-changed=memory.x");
     println!("cargo:rerun-if-changed=build.rs");
 }
