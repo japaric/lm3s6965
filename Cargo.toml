@@ -1,7 +1,13 @@
 [package]
 authors = ["Jorge Aparicio <jorge@japaric.io>"]
+categories = ["embedded", "hardware-support", "no-std"]
+description = "Interrupt bindings for the LM3S6965 microcontroller"
+documentation = "https://docs.rs/lm3s6965"
 edition = "2018"
+keywords = ["arm", "cortex-m"]
+license = "MIT OR Apache-2.0"
 name = "lm3s6965"
+repository = "https://github.com/japaric/lm3s6965"
 version = "0.1.0"
 
 [dependencies]
