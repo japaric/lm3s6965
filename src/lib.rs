@@ -106,6 +106,7 @@ pub enum Interrupt {
 }
 
 unsafe impl Nr for Interrupt {
+    #[inline]
     fn nr(&self) -> u8 {
         match *self {
             Interrupt::GPIOA => 0,
@@ -284,6 +285,7 @@ pub struct Peripherals {
 
 impl Peripherals {
     /// Kind of useless as there's no register API but this is required by RTFM
+    #[inline]
     pub unsafe fn steal() -> Self {
         Peripherals { _0: () }
     }
