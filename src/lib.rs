@@ -24,6 +24,9 @@ pub use cortex_m_rt::interrupt;
 pub const NVIC_PRIO_BITS: u8 = 3;
 
 /// Enumeration of all interrupts
+///
+/// **NOTE**: When compiling this crate for the `thumbv6m-none-eabi` target this enumeration will
+/// only contain the variants from `GPIOA` to `GPIOG`.
 // NOTE: See Table 2-9 Interrupts. Section 2.5.2 "Exception types"
 #[allow(non_camel_case_types)]
 pub enum Interrupt {
@@ -90,18 +93,25 @@ pub enum Interrupt {
     /// GPIO Port G
     GPIOG,
     /// UART2
+    #[cfg(armv7m)]
     UART2,
     /// Timer 3A
+    #[cfg(armv7m)]
     TIMER_3A,
     /// Timer 3B
+    #[cfg(armv7m)]
     TIMER_3B,
     /// I2C1
+    #[cfg(armv7m)]
     I2C1,
     /// QEI1
+    #[cfg(armv7m)]
     QEI1,
     /// Ethernet Controller
+    #[cfg(armv7m)]
     ETHERNET,
     /// Hibernation Module
+    #[cfg(armv7m)]
     HIBERNATION,
 }
 
@@ -142,14 +152,21 @@ unsafe impl Nr for Interrupt {
             Interrupt::GPIOF => 30,
             Interrupt::GPIOG => 31,
             // Interrupt::RESERVED => 32,
+            #[cfg(armv7m)]
             Interrupt::UART2 => 33,
             // Interrupt::RESERVED => 34,
+            #[cfg(armv7m)]
             Interrupt::TIMER_3A => 35,
+            #[cfg(armv7m)]
             Interrupt::TIMER_3B => 36,
+            #[cfg(armv7m)]
             Interrupt::I2C1 => 37,
+            #[cfg(armv7m)]
             Interrupt::QEI1 => 38,
             // Interrupt::RESERVED => 39...41,
+            #[cfg(armv7m)]
             Interrupt::ETHERNET => 42,
+            #[cfg(armv7m)]
             Interrupt::HIBERNATION => 43,
         }
     }
@@ -187,12 +204,19 @@ extern "C" {
     fn FLASH_MEMORY_CONTROL();
     fn GPIOF();
     fn GPIOG();
+    #[cfg(armv7m)]
     fn UART2();
+    #[cfg(armv7m)]
     fn TIMER_3A();
+    #[cfg(armv7m)]
     fn TIMER_3B();
+    #[cfg(armv7m)]
     fn I2C1();
+    #[cfg(armv7m)]
     fn QEI1();
+    #[cfg(armv7m)]
     fn ETHERNET();
+    #[cfg(armv7m)]
     fn HIBERNATION();
 }
 
@@ -201,6 +225,7 @@ union Vector {
     reserved: u32,
 }
 
+#[cfg(armv7m)]
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
 static __INTERRUPTS: [Vector; 44] = [
@@ -274,6 +299,68 @@ static __INTERRUPTS: [Vector; 44] = [
     Vector {
         handler: HIBERNATION,
     },
+];
+
+#[cfg(not(armv7m))]
+#[link_section = ".vector_table.interrupts"]
+#[no_mangle]
+static __INTERRUPTS: [Vector; 32] = [
+    Vector { handler: GPIOA },
+    Vector { handler: GPIOB },
+    Vector { handler: GPIOC },
+    Vector { handler: GPIOD },
+    Vector { handler: GPIOE },
+    Vector { handler: UART0 },
+    Vector { handler: UART1 },
+    Vector { handler: SSI0 },
+    Vector { handler: I2C0 },
+    Vector { handler: PWM_FAULT },
+    Vector {
+        handler: PWM_GENERATOR_0,
+    },
+    Vector {
+        handler: PWM_GENERATOR_1,
+    },
+    Vector {
+        handler: PWM_GENERATOR_2,
+    },
+    Vector { handler: QEI0 },
+    Vector {
+        handler: ADC0_SEQUENCE_0,
+    },
+    Vector {
+        handler: ADC0_SEQUENCE_1,
+    },
+    Vector {
+        handler: ADC0_SEQUENCE_2,
+    },
+    Vector {
+        handler: ADC0_SEQUENCE_3,
+    },
+    Vector {
+        handler: WATCHDOG_TIMER_0,
+    },
+    Vector { handler: TIMER_0A },
+    Vector { handler: TIMER_0B },
+    Vector { handler: TIMER_1A },
+    Vector { handler: TIMER_1B },
+    Vector { handler: TIMER_2A },
+    Vector { handler: TIMER_2B },
+    Vector {
+        handler: ANALOG_COMPARATOR_0,
+    },
+    Vector {
+        handler: ANALOG_COMPARATOR_1,
+    },
+    Vector { reserved: 0 },
+    Vector {
+        handler: SYSTEM_CONTROL,
+    },
+    Vector {
+        handler: FLASH_MEMORY_CONTROL,
+    },
+    Vector { handler: GPIOF },
+    Vector { handler: GPIOG },
 ];
 
 /// All the peripherals

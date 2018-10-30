@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.1.3] - 2018-10-30
+
+### Fixed
+
+- `thumbv6m-none-eabi` support. When compiled for that target this crate will
+  only expose 32 interrupts, which is the maximum number of interrupts that
+  `cortex-m-rt` allows for the ARMv6-M architecture.
+
 ## [v0.1.2] - 2018-10-30
 
 ### Changed
