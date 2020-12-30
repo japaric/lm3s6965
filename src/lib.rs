@@ -29,6 +29,7 @@ pub const NVIC_PRIO_BITS: u8 = 3;
 /// only contain the variants from `GPIOA` to `GPIOG`.
 // NOTE: See Table 2-9 Interrupts. Section 2.5.2 "Exception types"
 #[allow(non_camel_case_types)]
+#[derive(Clone, Copy)]
 pub enum Interrupt {
     /// GPIO Port A
     GPIOA,
