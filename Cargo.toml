@@ -8,11 +8,11 @@ keywords = ["arm", "cortex-m"]
 license = "MIT OR Apache-2.0"
 name = "lm3s6965"
 repository = "https://github.com/japaric/lm3s6965"
-version = "0.1.3"
+version = "0.2.0"
 
 [dependencies]
-bare-metal = "0.2.3"
+cortex-m = "0.7.0"
 
 [dependencies.cortex-m-rt]
 features = ["device"]
-version = "0.6.5"
+version = "0.6.11"
