@@ -5,9 +5,6 @@
 //!
 //! [rtfm]: https://github.com/japaric/cortex-m-rtfm
 //!
-//! **NOTE**: This crate targets Rust 1.31 so you'll need nightly or beta until that
-//! version is released.
-//!
 //! # References
 //!
 //! - [LM3S6965 data sheet](https://www.ti.com/lit/ds/symlink/lm3s6965.pdf)
