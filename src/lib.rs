@@ -17,7 +17,7 @@
 #![no_std]
 
 pub use self::Interrupt as interrupt;
-use cortex_m::interrupt::InterruptNumber;
+use cortex_m::interrupt::Nr;
 pub use cortex_m_rt::interrupt;
 
 /// Number of bits available in the NVIC for configuring priority
