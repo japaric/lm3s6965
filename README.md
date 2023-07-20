@@ -7,9 +7,6 @@ running [Real Time For the Masses][rtfm] (RTFM) programs on QEMU.
 
 [rtfm]: https://github.com/japaric/cortex-m-rtfm
 
-**NOTE**: This crate targets Rust 1.31 so you'll need nightly or beta until that
-version is released.
-
 ## License
 
 Licensed under either of
